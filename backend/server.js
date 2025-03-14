@@ -23,9 +23,20 @@ app.get('/api/books', async (req, res) => {
   }
 });
 
+app.get('/',async(req,res)=>{
+try {
+ const result = 'HEllos world';
+ res.send(result);
+} catch (error) {
+  console.error("Error Getting Root",error);
+  res.status(500).json({error:'Failed to get root'});
+}
+
+
+});
+
 
 // similarly make for getting all users etc 
-
 
 app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);

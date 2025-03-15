@@ -22,6 +22,16 @@ app.get('/api/books', async (req, res) => {
     res.status(500).json({ error: 'Failed to fetch books' });
   }
 });
+app.get('/api/games', async (req, res) => {
+  try {
+    const pool = await connectToDatabase(); 
+    const result = await pool.request().query('SELECT * FROM Games'); 
+    res.json(result.recordset); 
+  } catch (error) {
+    console.error('Error fetching books:', error);
+    res.status(500).json({ error: 'Failed to fetch books' });
+  }
+});
 
 app.get('/',async(req,res)=>{
 try {

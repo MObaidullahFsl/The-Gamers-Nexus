@@ -29,13 +29,13 @@ app.get('/api/games', async (req, res) => {
     res.json(result.recordset); 
   } catch (error) {
     console.error('Error fetching books:', error);
-    res.status(500).json({ error: 'Failed to fetch books' });
+    res.status(500).json({ error: 'Failed to fetch games' });
   }
 });
 
 app.get('/',async(req,res)=>{
 try {
- const result = 'HEllos world';
+ const result = 'HEllo world';
  res.send(result);
 } catch (error) {
   console.error("Error Getting Root",error);

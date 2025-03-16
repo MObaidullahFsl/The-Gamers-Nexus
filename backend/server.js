@@ -42,9 +42,12 @@ try {
   res.status(500).json({error:'Failed to get root'});
 }
 
-
 });
 
+
+app.all('/secret',(res,req)=>{
+  console.log("Accessing the Secret Page...");
+})
 
 // similarly make for getting all users etc 
 

@@ -1,0 +1,80 @@
+DDL queries:
+-- Users Table
+CREATE TABLE Users (
+    id VARCHAR(255) PRIMARY KEY,
+    username VARCHAR(255) NOT NULL UNIQUE,
+    password VARCHAR(255) NOT NULL,
+    email VARCHAR(255) NOT NULL UNIQUE,
+    CHECK (LENGTH(password) >= 8) 
+);
+
+-- Games Table
+CREATE TABLE Games (
+    id VARCHAR(255) PRIMARY KEY,
+    title VARCHAR(255) NOT NULL,
+    thumbnailUrl VARCHAR(255),
+    trailerUrl VARCHAR(255),
+    publisher VARCHAR(255),
+    publish_date DATE,
+    FOREIGN KEY (publisher) REFERENCES Publishers(id) ON DELETE SET NULL ON UPDATE CASCADE
+);
+
+-- Genres Table
+CREATE TABLE Genres (
+    id VARCHAR(255) PRIMARY KEY,
+    genre VARCHAR(255) NOT NULL,
+    game_id VARCHAR(255) NOT NULL,
+    FOREIGN KEY (game_id) REFERENCES Games(id) ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+-- Publishers Table
+CREATE TABLE Publishers (
+    id VARCHAR(255) PRIMARY KEY,
+    user_id VARCHAR(255) NOT NULL,
+    game_id VARCHAR(255) NOT NULL,
+    publish_date DATE NOT NULL UNIQUE,
+    FOREIGN KEY (user_id) REFERENCES Users(id) ON DELETE CASCADE ON UPDATE CASCADE,
+    FOREIGN KEY (game_id) REFERENCES Games(id) ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+-- Purchases Table
+CREATE TABLE Purchases (
+    id VARCHAR(255) PRIMARY KEY,
+    user_id VARCHAR(255) NOT NULL,
+    game_id VARCHAR(255) NOT NULL,
+    purchase_date DATE NOT NULL,
+    FOREIGN KEY (user_id) REFERENCES Users(id) ON DELETE CASCADE ON UPDATE CASCADE,
+    FOREIGN KEY (game_id) REFERENCES Games(id) ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+-- Friends Table
+CREATE TABLE Friends (
+    id VARCHAR(255) PRIMARY KEY,
+    user_id VARCHAR(255) NOT NULL,
+    friend_id VARCHAR(255) NOT NULL,
+    FOREIGN KEY (user_id) REFERENCES Users(id) ON DELETE CASCADE ON UPDATE CASCADE,
+    FOREIGN KEY (friend_id) REFERENCES Users(id) ON DELETE CASCADE ON UPDATE CASCADE,
+    CHECK (user_id <> friend_id) 
+);
+
+-- Comments Table
+CREATE TABLE Comments (
+    id VARCHAR(255) PRIMARY KEY,
+    user_id VARCHAR(255) NOT NULL,
+    game_id VARCHAR(255) NOT NULL,
+    content TEXT NOT NULL,
+    date_made DATE NOT NULL,
+    FOREIGN KEY (user_id) REFERENCES Users(id) ON DELETE CASCADE ON UPDATE CASCADE,
+    FOREIGN KEY (game_id) REFERENCES Games(id) ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+
+
+
+
+
+
+
+
+
+

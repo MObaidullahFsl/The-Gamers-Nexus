@@ -2,7 +2,7 @@
 import sql from 'mssql'; 
 //import 'mssql/msnodesqlv8'; 
 const config = {
-  server: 'DESKTOP-0ADKTSM\\SQLEXPRESS',
+  server: 'localhost' ,
   database: 'TGN', 
   user: 'default', 
   password: '12345678',

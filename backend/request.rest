@@ -1,0 +1,14 @@
+GET http://localhost:5000/api/games
+###
+POST http://localhost:5000/login
+Content-Type: application/json
+
+{   
+    "name":"Ob",
+    "password":"12345678",
+    "email":"@abc.com"
+
+}
+###
+
+GET http://localhost:5000/api/users

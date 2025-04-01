@@ -62,7 +62,7 @@ try {
   const hashedPassword = await bcrypt.hash(user.password,salt);
   console.log(salt, hashedPassword);
   const pool = await connectToDatabase();
-  // ( 10, ${user.name}, ${user.password}, ${user.email} );
+
   console.log(user);
   const result = await pool.query(
     `insert into Users (username,password,email) values
@@ -81,7 +81,36 @@ try {
 }
 })
 
-app.all('/secret',(res,req)=>{
+app.post('/users/verify',async(req,res)=>{
+const currentPassword = req.body.password;
+const pool = await connectToDatabase();
+
+const user = await pool.query(`select * from Users where Users.username = '${req.body.name}' ` 
+  , function(error, res){
+
+    if (error) throw error; 
+    console.log("found: ",user);
+  });
+  // user found 
+
+try {
+    if (await bcrypt.compare(req.body.password,user.password)){
+
+      res.send("Success... Redirecting");
+    }else {
+
+      res.send("Denied ... Login again");
+
+    }
+
+} catch (error) {
+  console.log("Error comparing",error, error.message);
+    res.status(500).send("Failed to cmp passwords");
+}
+})
+
+
+app.all('/secret',(req,res)=>{
   console.log("Accessing the Secret Page...");
 })
 

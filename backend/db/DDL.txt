@@ -1,0 +1,78 @@
+
+-- Users Table
+CREATE TABLE Users (
+    id int not null identity(1,1) PRIMARY KEY,
+    username VARCHAR(255) NOT NULL UNIQUE,
+    password VARCHAR(255) NOT NULL,
+    email VARCHAR(255) NOT NULL UNIQUE,
+);
+
+-- Games Table
+CREATE TABLE Games (
+    id int not null identity(1,1) PRIMARY KEY,
+    title VARCHAR(255) NOT NULL,
+    thumbnailUrl VARCHAR(255),
+    trailerUrl VARCHAR(255),
+    publisher int not null,
+    publish_date DATE,
+);
+
+	alter table Games add constraint fk_1 FOREIGN KEY (publisher) REFERENCES Publishers(id) ON DELETE no action ON UPDATE no action
+-- Genres Table
+CREATE TABLE Genres (
+    id int not null identity(1,1) PRIMARY KEY,
+    genre VARCHAR(255) NOT NULL,
+    game_id int,
+    FOREIGN KEY (game_id) REFERENCES Games(id) ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+-- Publishers Table
+CREATE TABLE Publishers (
+    id int not null identity(1,1) PRIMARY KEY,
+    user_id INT NOT NULL,
+    game_id INT NOT NULL,
+    publish_date DATE NOT NULL UNIQUE,
+    FOREIGN KEY (user_id) REFERENCES Users(id) ON DELETE CASCADE ON UPDATE CASCADE,
+    FOREIGN KEY (game_id) REFERENCES Games(id) ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+-- Purchases Table
+CREATE TABLE Purchases (
+    id int not null identity(1,1) PRIMARY KEY,
+    user_id int not null,
+    game_id int not null,
+    purchase_date DATE NOT NULL,
+    FOREIGN KEY (user_id) REFERENCES Users(id) ON DELETE CASCADE ON UPDATE CASCADE,
+    FOREIGN KEY (game_id) REFERENCES Games(id) ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+-- Friends Table
+CREATE TABLE Friends (
+    id int not null identity(1,1) PRIMARY KEY,
+    user_id int NOT NULL,
+    friend_id int NOT NULL,
+    FOREIGN KEY (user_id) REFERENCES Users(id) ON DELETE CASCADE ON UPDATE CASCADE,
+    FOREIGN KEY (friend_id) REFERENCES Users(id) ON DELETE no action ON UPDATE no action,
+    CHECK (user_id <> friend_id) 
+);
+
+-- Comments Table
+CREATE TABLE Comments (
+    id int not null identity(1,1) PRIMARY KEY,
+    user_id int NOT NULL,
+    game_id int NOT NULL,
+    content TEXT NOT NULL,
+    date_made DATE NOT NULL,
+    FOREIGN KEY (user_id) REFERENCES Users(id) ON DELETE CASCADE ON UPDATE CASCADE,
+    FOREIGN KEY (game_id) REFERENCES Games(id) ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+
+
+
+
+
+
+
+
+

@@ -12,3 +12,15 @@ Content-Type: application/json
 ###
 
 GET http://localhost:5000/api/users
+
+
+### 
+POST http://localhost:5000/users/verify
+Content-Type: application/json
+
+{
+    "name":"test2",
+    "password":"12345678",
+    "email":"test2@abc.com"
+
+}

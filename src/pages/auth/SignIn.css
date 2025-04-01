@@ -1,0 +1,51 @@
+.leftSide,.rightSide,.main{
+display: flex;
+}
+* {
+
+    box-sizing: border-box;
+  }
+
+  body{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #EFEFEF;
+    min-height: 100vh;
+    
+  }
+  
+  html, body, #root {
+   
+    margin: 0px;
+    padding: 0px;
+     
+  }
+
+.main{
+    
+    height: 50vh;
+    min-width: 85vw;
+    min-height: 70vh;
+    box-shadow: 1px 1px 3px rgba(0,0,0,.3);
+    background: #EFEFEF;
+    border-radius: 10px;
+    padding:1px
+}
+
+.leftSide,.rightSide{
+width:50%;
+height: 100%;
+
+
+}
+
+.leftSide{
+    
+    background-color: #FFFF;
+}
+
+.rightSide{
+
+    background: #EFEFEF;
+}

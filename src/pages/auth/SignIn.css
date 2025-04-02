@@ -4,6 +4,7 @@ display: flex;
 * {
 
     box-sizing: border-box;
+    font-family: sans-serif;
   }
 
   body{
@@ -25,27 +26,178 @@ display: flex;
 .main{
     
     height: 50vh;
-    min-width: 85vw;
-    min-height: 70vh;
+    min-width: 75vw;
+    min-height: 85vh;
     box-shadow: 1px 1px 3px rgba(0,0,0,.3);
-    background: #EFEFEF;
+    background: #FFFF;
     border-radius: 10px;
-    padding:1px
+    
 }
 
 .leftSide,.rightSide{
 width:50%;
 height: 100%;
-
+border-radius: 10px;
 
 }
 
 .leftSide{
     
     background-color: #FFFF;
+    padding-left: 35px;padding-right: 35px;
+    padding:25px;
+    flex-direction: column;
+    justify-content:center;
+    align-items: flex-start;
 }
 
 .rightSide{
-
+   
+    overflow: hidden;
+    
     background: #EFEFEF;
+    background-image: url('../../assets/images/thumbnails/acshadows.jpg');
+    background-size: cover; 
+    background-position: center; 
+}
+
+
+
+.logo img{
+    width: 60px; height: 60px;
+    object-fit: contain ;
+    
+}
+
+.logo{
+    margin: 0px;padding: 0px;
+    height: 60px;
+}
+
+.buttons{
+    display: flex;
+    margin-bottom: 30px; margin-top: 30px;
+}
+
+.buttons div{
+    display: flex;
+    border-radius: 10px;
+    font-size: 14px;
+    padding-top:5px; padding-bottom:5px;
+    padding-right:15px; padding-left:15px;
+    background: #EFEFEF;
+    margin-right: 10px;
+    align-items: center;
+    justify-content: center;
+    font-weight: 500;
+
+}   
+.login img, .createAccount img{
+    width: 20px;
+    height: 20px;
+
+    margin-right: 2px;
+}
+.greeting{
+
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: left;
+}
+.greeting .title{
+    font-size: 25px;
+}
+.greeting  span{
+    font-weight: 800;
+}
+.greeting .msg{
+    font-size: 14px;
+    color: #969696;
+   
+}
+
+.continue{
+    display: flex;
+    color: #D5D5D5;
+    font-size: 14px;
+    width: 100%;
+    margin-top: 30px;
+    margin-bottom: 10px;
+}
+.text{
+    display: flex;
+    width: 100%;
+}
+.line{
+    margin-top: 10px;
+    background:#969696;
+    height: 1px ; width: 100%;
+    min-height: 1px; min-width: 10%;
+}
+.continueText{
+    text-wrap: nowrap;
+    text-align: left;
+}
+
+.forgot{
+    font-size: 10px;
+}
+
+.icons{
+
+    display: flex;
+   align-self: flex-start;
+}
+
+.discord, .whatsapp, .instagram{
+    object-fit: contain;
+    width:25px;
+    height:25px;
+}
+.google{
+    width:20px;
+    height:20px;
+}
+
+
+.icons div{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50px;
+    height: 50px;
+    background-color: #EFEFEF;
+    border-radius: 10px;
+    margin-right:20px;
+    padding-left: 35px; padding-right:35px ;
+    padding-top:10px; padding-bottom: 10px;
+}
+
+.arrows{
+    margin-left: auto;
+    display: flex;
+    margin-right:15px;
+    margin-top:10px;
+    gap:2px
+}
+.left, .right{
+    margin-top:10px;
+    margin:2px;
+    border-radius: 100%;
+    background-color: #FFFF;
+    width:22px; height:22px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding:12px;
+    
+}
+.left img, .right img{
+    object-fit: contain;
+    width:10px; height:10px;
+
+}
+.left img{
+    transform:rotate(180deg);
 }

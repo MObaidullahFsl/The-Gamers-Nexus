@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./SignIn.css";
 import "./themes.css";
 import FormField from "../../components/FormField";
@@ -10,14 +10,23 @@ const SignIn = () => {
   });
 
   const [mode, setmode] = useState(0);
-  // const [darkmode, setdarkmode] = useState(false)
+  const [darkmode, setdarkmode] = useState(false)
   // const thumbnails = images.th;
+
+  useEffect(() => {
+    document.documentElement.setAttribute(
+      'data-theme',
+      darkmode ? 'dark' : 'light'
+    );
+  }, [darkmode]);
 
   return (
     <div className="main">
       <div className="leftSide">
-        <div className="logo">
-          <img src={images.logoDay} alt="Logo" />
+        <div className="logo" onClick={()=>{
+          setdarkmode(!darkmode);
+        }}>
+          <img src={darkmode?images.logoDark:images.logoDay} alt="Logo" />
         </div>
 
         <div className="buttons">
@@ -75,7 +84,13 @@ const SignIn = () => {
           placeholder="enter your username"
           handleInput={(e) => setform({ ...form, email: e })}
           value={form.email}
-          style={{ width: "100%" }}
+          
+          style={darkmode?{
+            backgroundColor:'#323232',
+
+          }:{
+            backgroundColor:'white',
+          }}
           type="email"
         />
         <div className="passwordContainer">
@@ -84,7 +99,15 @@ const SignIn = () => {
           placeholder="enter your password"
           handleInput={(e) => setform({ ...form, password: e })}
           value={form.password}
-          style={{ minWidth: "80%",display:"inline" }}
+          style={darkmode?{
+            backgroundColor:'#323232',
+             minWidth: "80%",display:"inline"
+
+          }:{
+            backgroundColor:'white',
+             minWidth: "80%",display:"inline"
+          }}
+          
           type="password"
         />
         <div className="enter">
@@ -105,19 +128,19 @@ const SignIn = () => {
         <div className="icons">
           <div>
             {" "}
-            <img className="google" src={images.google} alt="google" />
+            <img className="google" src={darkmode?images.googleDark:images.google} alt="google" />
           </div>
           <div>
             {" "}
-            <img className="discord" src={images.discord} alt="google" />
+            <img className="discord" src={darkmode?images.discordDark:images.discord} alt="google" />
           </div>
           <div>
             {" "}
-            <img className="instagram" src={images.instagram} alt="google" />
+            <img className="instagram" src={darkmode?images.instagramDark:images.instagram} alt="google" />
           </div>
           <div>
             {" "}
-            <img className="whatsapp" src={images.whatsapp} alt="google" />
+            <img className="whatsapp" src={darkmode?images.whatsappDark:images.whatsapp} alt="google" />
           </div>
         </div>
         {/* 
@@ -133,11 +156,11 @@ const SignIn = () => {
         <div className="arrows">
           <div className="left">
             {" "}
-            <img src={images.arrow} alt="arrow left" />
+            <img src={darkmode?images.arrowDark:images.arrow} alt="arrow left" />
           </div>
           <div className="right">
             {" "}
-            <img src={images.arrow} alt="arrow left" />
+            <img src={darkmode?images.arrowDark:images.arrow} alt="arrow left" />
           </div>
         </div>
       </div>

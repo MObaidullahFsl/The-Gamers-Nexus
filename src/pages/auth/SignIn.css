@@ -58,7 +58,7 @@ border-radius: 10px;
     overflow: hidden;
     
     background: var(--bg-primary);
-    background-image: url('../../assets/images/thumbnails/miside.jpg');
+    background-image: url('../../assets/images/thumbnails/isometric.jpeg');
     background-size: cover; 
     background-position: center; 
 }
@@ -135,10 +135,12 @@ border-radius: 10px;
     align-items: flex-start;
     justify-content: left;
     margin-bottom: 15px;
+    color:var(--text-primary);
 
 }
 .greeting .title{
     font-size: 25px;
+    color:var(--text-primary);
 }
 .greeting  span{
     font-weight: 800;
@@ -200,6 +202,7 @@ border-radius: 10px;
 
 .forgot{
     font-size: 10px;
+    color: var(--text-primary);
 }
 
 .icons{

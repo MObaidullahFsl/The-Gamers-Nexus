@@ -13,6 +13,7 @@
     font-style: italic;
     opacity: .8; 
   }
+
 .fieldtitle{
     font-size: 14px;
     color:#969696;
@@ -24,6 +25,7 @@
     width: 100%;
     height: 48px;
     border: 1px solid #D5D5D5 ;
-    color:#969696;
+    /* color:#969696; */
+    color: var(--text-secondary);
     padding:10px
 }

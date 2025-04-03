@@ -1,14 +1,23 @@
 
 import logoDay from "./icons/logoDay.png"
+import logoDark from "./icons/logoDark.png"
+
 import login from "./icons/login.png"
 import create from "./icons/create.png"
+import loginLight from "./icons/loginWhite.png"
+import createLight from "./icons/createWhite.png"
+
 import google from "./icons/google.png"
 import discord from "./icons/discord.png"
 import whatsapp from "./icons/whatsapp.png"
 import instagram from "./icons/instagram.png"
+import googleDark from "./icons/googleDark.png"
+import discordDark from "./icons/discordDark.png"
+import whatsappDark from "./icons/whatsappDark.png"
+import instagramDark from "./icons/instagramDark.png"
+
 import arrow from "./icons/arrow.png"
-import loginLight from "./icons/loginWhite.png"
-import createLight from "./icons/createWhite.png"
+import arrowDark from "./icons/arrowDark.png"
 import enter from "./icons/enter.png"
 
 import th1 from "./thumbnails/cyberpunk.jpg"
@@ -19,4 +28,4 @@ import th4 from "./thumbnails/acshadows.jpg"
 const th = [th1,th2,th3,th4];
 
 
-export default {  logoDay,login,create,loginLight,createLight,google,discord,whatsapp,instagram,arrow,enter, th };
+export default {  logoDay,logoDark,login,create,loginLight,createLight,google,discord,whatsapp,instagram,googleDark,discordDark,instagramDark,whatsappDark,arrow,arrowDark,enter, th };

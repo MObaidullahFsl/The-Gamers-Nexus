@@ -11,8 +11,9 @@ display: flex;
     display: flex;
     justify-content: center;
     align-items: center;
-    background: #EFEFEF;
+    background: var(--bg-primary);
     min-height: 100vh;
+    
     
   }
   
@@ -29,8 +30,9 @@ display: flex;
     min-width: 75vw;
     min-height: 85vh;
     box-shadow: 1px 1px 3px rgba(0,0,0,.3);
-    background: #FFFF;
+    background: var(--bg-secondary);
     border-radius: 10px;
+    
     
 }
 
@@ -43,11 +45,11 @@ border-radius: 10px;
 
 .leftSide{
     
-    background-color: #FFFF;
-    padding-left: 35px;padding-right: 35px;
-    padding:25px;
+    background-color: var(--bg-secondary);
+    padding-left: 35px;padding-right: 55px;
+    padding-top: 25px; padding-bottom: 25px;
     flex-direction: column;
-    justify-content:center;
+    justify-content:space-between;
     align-items: flex-start;
 }
 
@@ -55,8 +57,8 @@ border-radius: 10px;
    
     overflow: hidden;
     
-    background: #EFEFEF;
-    background-image: url('../../assets/images/thumbnails/acshadows.jpg');
+    background: var(--bg-primary);
+    background-image: url('../../assets/images/thumbnails/miside.jpg');
     background-size: cover; 
     background-position: center; 
 }
@@ -74,18 +76,46 @@ border-radius: 10px;
     height: 60px;
 }
 
+.login,.createAccount{
+    background-color: var(--bg-secondary);
+    color: var(--text-primary);
+    
+    
+}
+.login::active, .createAccount::active{
+    transform: scale(0.98) translateY(1px); /* Slight push down */
+    filter: brightness(0.95); /* Darkens slightly */
+}
+
+.loginText,.createAccountText{
+    background-color: var(--bg-secondary);
+    color: var(--text-primary);
+    
+}
+.login.dark,.createAccount.dark{
+    
+    background-color: #010101;
+}
+
+
+.loginText.dark, .createAccountText.dark{
+    background-color: #010101;
+    color: #FFFF;
+}
+
 .buttons{
     display: flex;
-    margin-bottom: 30px; margin-top: 30px;
+    margin-bottom: 30px; margin-top: 10px;
 }
 
 .buttons div{
+    color:var(--text-primary);
     display: flex;
     border-radius: 10px;
     font-size: 14px;
     padding-top:5px; padding-bottom:5px;
     padding-right:15px; padding-left:15px;
-    background: #EFEFEF;
+    background-color: var(--bg-primary);
     margin-right: 10px;
     align-items: center;
     justify-content: center;
@@ -104,6 +134,8 @@ border-radius: 10px;
     flex-direction: column;
     align-items: flex-start;
     justify-content: left;
+    margin-bottom: 15px;
+
 }
 .greeting .title{
     font-size: 25px;
@@ -113,13 +145,39 @@ border-radius: 10px;
 }
 .greeting .msg{
     font-size: 14px;
-    color: #969696;
+    color: var(--text-secondary);
    
 }
 
+.enter{
+    display: inline-flex;
+    background: #e32d36;
+    min-width:50px; min-height:50px;
+    border-radius: 100%;
+    padding:4px;
+    margin-top: 20px;
+    margin-left: 15px;
+    vertical-align: middle;
+    justify-content: center; align-items: center;
+
+}
+.enter img{
+    object-fit: contain;
+    max-width: 25px;
+    max-height: 20px;
+}
+
+.passwordContainer{
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+}
 .continue{
     display: flex;
-    color: #D5D5D5;
+    /* color: #D5D5D5; */
+
+    color:var(--text-secondary);
     font-size: 14px;
     width: 100%;
     margin-top: 30px;
@@ -131,7 +189,7 @@ border-radius: 10px;
 }
 .line{
     margin-top: 10px;
-    background:#969696;
+    background:var(--text-secondary);
     height: 1px ; width: 100%;
     min-height: 1px; min-width: 10%;
 }
@@ -152,12 +210,12 @@ border-radius: 10px;
 
 .discord, .whatsapp, .instagram{
     object-fit: contain;
-    width:25px;
-    height:25px;
-}
-.google{
     width:20px;
     height:20px;
+}
+.google{
+    width:15px;
+    height:15px;
 }
 
 
@@ -167,7 +225,7 @@ border-radius: 10px;
     align-items: center;
     width: 50px;
     height: 50px;
-    background-color: #EFEFEF;
+    background-color: var(--bg-primary);
     border-radius: 10px;
     margin-right:20px;
     padding-left: 35px; padding-right:35px ;
@@ -185,7 +243,7 @@ border-radius: 10px;
     margin-top:10px;
     margin:2px;
     border-radius: 100%;
-    background-color: #FFFF;
+    background-color: var(--bg-secondary);
     width:22px; height:22px;
     display: flex;
     justify-content: center;
@@ -201,3 +259,5 @@ border-radius: 10px;
 .left img{
     transform:rotate(180deg);
 }
+
+

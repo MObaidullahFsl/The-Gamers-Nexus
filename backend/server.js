@@ -2,6 +2,7 @@ import express from 'express';
 import cors from 'cors';
 import connectToDatabase from './db.js'; 
 import bcrypt from 'bcrypt'
+import session from 'express-session'
 
 const app = express();
 const PORT = 5000; // ull see this in the url used to access backend
@@ -54,6 +55,7 @@ try {
 });
 
 // all login logic, mw goes here
+
 app.post('/login',async (req,res)=>{
 try {
 
@@ -69,12 +71,18 @@ try {
     ( '${user.name}', '${hashedPassword}', '${user.email}');
     `);
 
-    if(result){
-      res.status(201).send("Entered values successfully");
-    }else{
+    try {
+      if(result){
+        res.status(201).send("Entered values successfully");
+      }
+    } catch (error) {
       res.status(400).send("Entered values failed",error.message);
-
     }
+  //   if(result){
+  //     res.status(201).send("Entered values successfully");
+  //   }
+  // else
+  //   res.status(400).send("Entered values failed",error.message);
 } catch (error) {
   console.log("Error inputting",error, error.message);
   res.status(418).send("didnt work");
@@ -109,10 +117,24 @@ try {
 }
 })
 
+function isLoggedIn (req, res, next){
+if(req.session && req.session.user){
+  return next();
+}
+res.status(401).send("unauthorized");
+}
+
+app.get('api/home',isLoggedIn,(req,res)=>{
+  console.log(`Welcome ,${req.session.user.username} !`)
+  res.json(req.session.user);
+})
 
 app.all('/secret',(req,res)=>{
   console.log("Accessing the Secret Page...");
 })
+
+
+
 
 // similarly make for getting all users etc 
 

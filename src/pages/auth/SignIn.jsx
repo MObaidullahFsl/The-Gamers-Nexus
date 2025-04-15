@@ -3,16 +3,101 @@ import "./SignIn.css";
 import "./themes.css";
 import FormField from "../../components/FormField";
 import images from "../../assets/images/constants";
+import { useNavigate } from "react-router-dom";
+
+
 const SignIn = () => {
   const [form, setform] = useState({
     username: "",
     password: "",
   });
 
+
   const [mode, setmode] = useState(0);
   const [darkmode, setdarkmode] = useState(false)
   // const thumbnails = images.th;
+  const navigate = useNavigate();
+  const [user, setuser] = useState(null)
 
+  useEffect(()=>{
+
+    const alreadylogged=async()=>{
+      try{
+        const req = await fetch("http://localhost:5000/api/auth", {
+          credentials: "include",
+          headers: {
+            'Content-Type': 'application/json',
+          }
+        });
+      
+      const retype = req.headers.get("content-type");
+      if(!retype || !retype.includes("application/json")){
+        throw new Error("ret type err!, ret type is: \n",retype)
+      }
+      const result = await req.json(); 
+      if(result.user){
+        console.log(`Already logged in`)
+        setuser(result.user)
+        navigate('/')
+      }else{
+        alert("not logged in!")
+      } }catch (error) {
+        console.error('Error checking authentication:', error);
+        
+        //navigate('/signin');
+      }
+    }
+   alreadylogged()
+  },[navigate])
+
+  
+  const [isSubmitting, setisSubmitting] = useState(false);
+
+  const submit = async() =>{
+    console.log(form);
+    if (form.username=="" || form.password=="") {
+      alert("Error Fill in all the fields!");
+      return;
+    }
+    setisSubmitting(true);
+    try {
+      const result = await fetch('http://localhost:5000/api/signin',{
+        method:'POST',
+        headers:{
+          'Content-Type':'application/json',
+        },   
+        credentials: 'include',
+        body: JSON.stringify({
+      username: `${form.username}`,
+          password: `${form.password}`
+        })
+     
+      })
+
+        if(!result.ok){
+          console.log("a:",result);
+          // const errString = await result.json();
+          
+          //throw new Error(errString.message || "ERror");
+          throw new Error(`HTTP error! status: ${result.status}`);
+        }
+
+        const data  = await result.json();
+        setuser(data.user);
+        
+        alert("Logged in Successfully!");
+        navigate("/");
+
+
+
+
+    } catch (error) {
+      console.error("failed!",error,error.message)
+    }finally{
+      setisSubmitting(false);
+    }
+  }
+  
   useEffect(() => {
     document.documentElement.setAttribute(
       'data-theme',
@@ -82,8 +167,8 @@ const SignIn = () => {
         <FormField
           title="Username"
           placeholder="enter your username"
-          handleInput={(e) => setform({ ...form, email: e })}
-          value={form.email}
+          handleInput={(e) => setform({ ...form, username: e })}
+          value={form.username}
           
           style={darkmode?{
             backgroundColor:'#323232',
@@ -91,7 +176,7 @@ const SignIn = () => {
           }:{
             backgroundColor:'white',
           }}
-          type="email"
+          type="text"
         />
         <div className="passwordContainer">
         <FormField
@@ -110,7 +195,7 @@ const SignIn = () => {
           
           type="password"
         />
-        <div className="enter">
+        <div className="enter" onClick={submit}>
           <img src={images.enter} alt="enter arrow" />
         </div>
 

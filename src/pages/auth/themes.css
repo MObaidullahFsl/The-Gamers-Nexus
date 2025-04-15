@@ -1,8 +1,9 @@
 :root{
-    --bg-primary:#EFEFEF;   
+    --bg-primary:#efefef;   
     --bg-secondary:#FFFF;
     --text-primary:black;
     --text-secondary:#969696;
+    --hover: rgb(223, 222, 222);  
     
 }
 
@@ -11,5 +12,5 @@
     --bg-secondary:#1E1E1E;
     --text-primary:white;
     --text-secondary:#969696;
-    
+    --hover:#262626; 
 }

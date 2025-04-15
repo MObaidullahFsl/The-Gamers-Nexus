@@ -1,26 +1,72 @@
 GET http://localhost:5000/api/games
-###
-POST http://localhost:5000/login
-Content-Type: application/json
 
-{   
-    "name":"test2",
-    "password":"12345678",
-    "email":"test2@abc.com"
-
-}
 ###
 
 GET http://localhost:5000/api/users
 
 
 ### 
-POST http://localhost:5000/users/verify
+POST http://localhost:5000/api/signin
 Content-Type: application/json
 
 {
-    "name":"test2",
-    "password":"12345678",
-    "email":"test2@abc.com"
+    "username":"test2",
+    "password":"12345678"
 
 }
+
+### 
+POST http://localhost:5000/api/signup
+Content-Type: application/json
+
+{
+    "username":"test5",
+    "password":"12345678"
+
+}
+
+###
+
+GET http://localhost:5000/api/auth
+
+
+
+### Fetch user lib
+GET http://localhost:5000/api/library
+Content-Type: application/json
+
+{
+  "userId": 6
+}
+
+
+### Search Games by Title
+GET http://localhost:5000/api/games/search?title=S
+
+### Fetch Most Sold Games
+GET http://localhost:5000/api/games/most-sold
+
+### Get Comments for a Game
+GET http://localhost:5000/api/games/1/comments
+
+### Fetch Friend List
+POST http://localhost:5000/api/friends/add
+Content-Type: application/json
+
+{
+  "userId": "6",
+  "friendId":"1"
+}
+
+###
+GET http://localhost:5000/api/comments/user/6
+Content-Type: application/json
+
+
+###
+GET http://localhost:5000/api/games/publisher/2
+Content-Type: application/json
+
+
+
+

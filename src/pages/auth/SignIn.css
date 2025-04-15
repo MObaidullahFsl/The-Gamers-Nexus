@@ -58,7 +58,7 @@ border-radius: 10px;
     overflow: hidden;
     
     background: var(--bg-primary);
-    background-image: url('../../assets/images/thumbnails/isometric.jpeg');
+    background-image: url('../../assets/images/thumbnails/acshadows.jpg');
     background-size: cover; 
     background-position: center; 
 }
@@ -163,6 +163,9 @@ border-radius: 10px;
     justify-content: center; align-items: center;
 
 }
+.enter:hover{
+    background: #ba161e;
+}
 .enter img{
     object-fit: contain;
     max-width: 25px;
@@ -233,6 +236,9 @@ border-radius: 10px;
     margin-right:20px;
     padding-left: 35px; padding-right:35px ;
     padding-top:10px; padding-bottom: 10px;
+}
+.icons div:hover{
+    background-color: var(--hover);
 }
 
 .arrows{

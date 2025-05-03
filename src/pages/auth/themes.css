@@ -4,13 +4,17 @@
     --text-primary:black;
     --text-secondary:#969696;
     --hover: rgb(223, 222, 222);  
-    
+    /* --dark-bg-prim: #323232;
+    --dark-bg-sec:    #1E1E1E;  
+    --dark-text-prim: white;
+    --dark-text-sec: #969696;
+    --dark-hover:#262626; */
 }
 
-[data-theme="dark"]{
-    --bg-primary:#323232;
-    --bg-secondary:#1E1E1E;
-    --text-primary:white;
+body.dark-mode{
+    --bg-primary:    #323232;
+    --bg-secondary:  #1E1E1E;
+    --text-primary:  white;
     --text-secondary:#969696;
-    --hover:#262626; 
+    --hover:         #262626; 
 }

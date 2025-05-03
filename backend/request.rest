@@ -20,7 +20,7 @@ POST http://localhost:5000/api/signup
 Content-Type: application/json
 
 {
-    "username":"test5",
+    "username":"test10",
     "password":"12345678"
 
 }
@@ -41,10 +41,18 @@ Content-Type: application/json
 
 
 ### Search Games by Title
-GET http://localhost:5000/api/games/search?title=S
+GET http://localhost:5000/api/games/search?title=C
 
+
+### Search Games by Title
+GET http://localhost:5000/api/users/search?title=C
 ### Fetch Most Sold Games
 GET http://localhost:5000/api/games/most-sold
+
+### filter by name
+GET http://localhost:5000/api/games/name
+Content-Type: application/json
+
 
 ### Get Comments for a Game
 GET http://localhost:5000/api/games/1/comments
@@ -69,4 +77,6 @@ Content-Type: application/json
 
 
 
-
+###
+GET http://localhost:5000/api/users/1/common-games/4
+Content-Type: application/json

@@ -58,7 +58,7 @@ border-radius: 10px;
     overflow: hidden;
     
     background: var(--bg-primary);
-    background-image: url('../../assets/images/thumbnails/acshadows.jpg');
+    background-image: url('../../assets/images/thumbnails/isometric.jpeg');
     background-size: cover; 
     background-position: center; 
 }

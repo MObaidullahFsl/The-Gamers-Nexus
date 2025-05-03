@@ -4,17 +4,18 @@ import "./themes.css";
 import FormField from "../../components/FormField";
 import images from "../../assets/images/constants";
 import { useNavigate } from "react-router-dom";
-
+import { useDarkMode } from "../../context/DarkModeContext";
 
 const SignIn = () => {
   const [form, setform] = useState({
     username: "",
     password: "",
   });
+  
+  const {isDarkMode,toggleDarkMode} = useDarkMode();
 
 
   const [mode, setmode] = useState(0);
-  const [darkmode, setdarkmode] = useState(false)
   // const thumbnails = images.th;
   const navigate = useNavigate();
   const [user, setuser] = useState(null)
@@ -80,6 +81,7 @@ const SignIn = () => {
           
           //throw new Error(errString.message || "ERror");
           throw new Error(`HTTP error! status: ${result.status}`);
+          
         }
 
         const data  = await result.json();
@@ -98,39 +100,29 @@ const SignIn = () => {
     }
   }
   
-  useEffect(() => {
-    document.documentElement.setAttribute(
-      'data-theme',
-      darkmode ? 'dark' : 'light'
-    );
-  }, [darkmode]);
-
   return (
     <div className="main">
       <div className="leftSide">
-        <div className="logo" onClick={()=>{
-          setdarkmode(!darkmode);
-        }}>
-          <img src={darkmode?images.logoDark:images.logoDay} alt="Logo" />
+        <div className="logo" >
+          <img onClick={toggleDarkMode} src={isDarkMode ? images.logoDark : images.logoDay} alt="Logo" />
         </div>
 
         <div className="buttons">
           {mode ? (
             <>
-              <div className="login " 
+              <div
+                className="login "
                 onClick={() => {
                   setmode(0);
-                  console.log("clicked login")
-                }}>
+                  console.log("clicked login");
+                }}
+              >
                 <img src={images.login} alt="login" />
 
                 <div className="logintext">Log In</div>
               </div>
 
-              <div
-                className="createAccount dark"
-              
-              >
+              <div className="createAccount dark">
                 <img src={images.createLight} alt="create" />
 
                 <div className="createAccountText dark">Create Account</div>
@@ -138,17 +130,20 @@ const SignIn = () => {
             </>
           ) : (
             <>
-              <div
-                className="login dark">
+              <div className="login dark" >
                 <img src={images.loginLight} alt="login" />
 
                 <div className="loginText dark">Log In</div>
               </div>
 
-              <div className="createAccount"  onClick={() => {
+              <div
+                className="createAccount"
+                onClick={() => {
                   setmode(1);
-                  console.log("dark login")
-                }}>
+                  console.log("dark login");
+                  
+                }}
+              >
                 <img src={images.create} alt="create" />
 
                 <div className="createAccountText">Create Account</div>
@@ -169,38 +164,42 @@ const SignIn = () => {
           placeholder="enter your username"
           handleInput={(e) => setform({ ...form, username: e })}
           value={form.username}
-          
-          style={darkmode?{
-            backgroundColor:'#323232',
-
-          }:{
-            backgroundColor:'white',
-          }}
+          style={
+            isDarkMode
+              ? {
+                  backgroundColor: "#323232",
+                }
+              : {
+                  backgroundColor: "white",
+                }
+          }
           type="text"
         />
         <div className="passwordContainer">
-        <FormField
-          title="Password"
-          placeholder="enter your password"
-          handleInput={(e) => setform({ ...form, password: e })}
-          value={form.password}
-          style={darkmode?{
-            backgroundColor:'#323232',
-             minWidth: "80%",display:"inline"
-
-          }:{
-            backgroundColor:'white',
-             minWidth: "80%",display:"inline"
-          }}
-          
-          type="password"
-        />
-        <div className="enter" onClick={submit}>
-          <img src={images.enter} alt="enter arrow" />
+          <FormField
+            title="Password"
+            placeholder="enter your password"
+            handleInput={(e) => setform({ ...form, password: e })}
+            value={form.password}
+            style={
+              isDarkMode
+                ? {
+                    backgroundColor: "#323232",
+                    minWidth: "80%",
+                    display: "inline",
+                  }
+                : {
+                    backgroundColor: "white",
+                    minWidth: "80%",
+                    display: "inline",
+                  }
+            }
+            type="password"
+          />
+          <div className="enter" onClick={submit}>
+            <img src={images.enter} alt="enter arrow" />
+          </div>
         </div>
-
-        </div>
-       
 
         <div className="forgot">Forgot Password?</div>
         <div className="continue">
@@ -213,19 +212,35 @@ const SignIn = () => {
         <div className="icons">
           <div>
             {" "}
-            <img className="google" src={darkmode?images.googleDark:images.google} alt="google" />
+            <img
+              className="google"
+              src={isDarkMode ? images.googleDark : images.google}
+              alt="google"
+            />
           </div>
           <div>
             {" "}
-            <img className="discord" src={darkmode?images.discordDark:images.discord} alt="google" />
+            <img
+              className="discord"
+              src={isDarkMode ? images.discordDark : images.discord}
+              alt="google"
+            />
           </div>
           <div>
             {" "}
-            <img className="instagram" src={darkmode?images.instagramDark:images.instagram} alt="google" />
+            <img
+              className="instagram"
+              src={isDarkMode ? images.instagramDark : images.instagram}
+              alt="google"
+            />
           </div>
           <div>
             {" "}
-            <img className="whatsapp" src={darkmode?images.whatsappDark:images.whatsapp} alt="google" />
+            <img
+              className="whatsapp"
+              src={isDarkMode ? images.whatsappDark : images.whatsapp}
+              alt="google"
+            />
           </div>
         </div>
         {/* 
@@ -241,11 +256,17 @@ const SignIn = () => {
         <div className="arrows">
           <div className="left">
             {" "}
-            <img src={darkmode?images.arrowDark:images.arrow} alt="arrow left" />
+            <img
+              src={isDarkMode ? images.arrowDark : images.arrow}
+              alt="arrow left"
+            />
           </div>
           <div className="right">
             {" "}
-            <img src={darkmode?images.arrowDark:images.arrow} alt="arrow left" />
+            <img
+              src={isDarkMode ? images.arrowDark : images.arrow}
+              alt="arrow left"
+            />
           </div>
         </div>
       </div>

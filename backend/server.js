@@ -183,6 +183,7 @@ app.post('/api/signin',async(req,res)=>{
 
 });
 
+
 function isLoggedIn (req, res, next){
   
 if(req.session.user){
@@ -250,6 +251,19 @@ app.get('/api/games/search', async (req, res) => {
   }
 });
 
+app.get('/api/users/search', async (req, res) => {
+  try {
+    const searchTerm = `%${req.query.title}%`;
+    const pool = await connectToDatabase();
+    const result = await pool.request()
+      .input('title', sql.VarChar, searchTerm)
+      .query('SELECT * FROM Users WHERE username LIKE @title');
+    res.json(result.recordset);
+  } catch (error) {
+    console.error('Error searching users:', error);
+    res.status(500).json({ error: 'Failed to search users' });
+  }
+});
 
 
 // Filter Games by Most Sold
@@ -257,7 +271,7 @@ app.get('/api/games/most-sold', async (req, res) => {
   try {
     const pool = await connectToDatabase();
     const result = await pool.request().query(`
-      SELECT Games.*, COUNT(Purchases.id) AS sales 
+      SELECT Games.id, COUNT(Purchases.id) AS sales 
       FROM Games
       LEFT JOIN Purchases ON Games.id = Purchases.game_id
       GROUP BY Games.id
@@ -270,6 +284,21 @@ app.get('/api/games/most-sold', async (req, res) => {
   }
 });
 
+// by name
+
+app.get('/api/games/name', async (req, res) => {
+  try {
+    const pool = await connectToDatabase();
+    const result = await pool.request().query(`
+      SELECT * FROM Games 
+      ORDER BY title ASC
+    `);
+    res.json(result.recordset);
+  } catch (error) {
+    console.error('Error fetching games alphabetically:', error);
+    res.status(500).json({ error: 'Failed to fetch games' });
+  }
+});
 
 // Fetch All Friends
 app.get('/api/friends', async (req, res) => {
@@ -367,6 +396,48 @@ app.post('/api/logout', (req, res) => {
 });
 
 
+// Get Common Games Between Friends
+app.get('/api/users/:userId/common-games/:friendId', async (req, res) => {
+  try {
+    const { userId, friendId } = req.params;
+    const pool = await connectToDatabase();
+
+    // First verify they are mutual friends
+    const friendshipCheck = await pool.request()
+      .input('userId', sql.Int, userId)
+      .input('friendId', sql.Int, friendId)
+      .query(`
+        SELECT 1 FROM Friends 
+        WHERE (user_id = @userId AND friend_id = @friendId)
+        AND EXISTS (
+          SELECT 1 FROM Friends 
+          WHERE user_id = @friendId AND friend_id = @userId
+        )
+      `);
+
+    if (friendshipCheck.recordset.length === 0) {
+      return res.status(400).json({ 
+        result: "fail", 
+        message: "Users are not mutual friends or friendship doesn't exist" 
+      });
+    }
+
+    const result = await pool.request()
+      .input('userId', sql.Int, userId)
+      .input('friendId', sql.Int, friendId)
+      .query(`
+        SELECT Games.* FROM Games
+        JOIN Purchases AS p1 ON Games.id = p1.game_id
+        JOIN Purchases AS p2 ON Games.id = p2.game_id
+        WHERE p1.user_id = @userId AND p2.user_id = @friendId
+      `);
+
+    res.json(result.recordset);
+  } catch (error) {
+    console.error("Error fetching common games:", error);
+    res.status(500).json({ error: "Failed to fetch common games" });
+  }
+});
 
 app.get('/api/comments/user/:userId', async (req, res) => {
   try {
@@ -408,7 +479,23 @@ app.get('/api/games/publisher/:publisherId', async (req, res) => {
   }
 });
 
+app.get('api/games/:gameId',async(req,res)=>{
+  try {
+    const pool = await connectToDatabase();
+    const gameId = req.params.gameId
+    const result = await pool.request()
+    .input('gameId',sql.VarChar,gameId)
+    .query(`
+      select * 
+      from Games
+      Where Games.id = @gameId
 
+      `)
+      res.json(result.recordset);
+  } catch (error) {
+    console.log({message:error})
+  }
+})
 
 
 app.listen(PORT, () => {

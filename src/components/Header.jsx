@@ -13,14 +13,14 @@ const Header = () => {
 
   <header className="main-header">
         <div className="header-content">
-            <div className="back-arrow">
-              <img className="arrow" src={images.arrow} alt="" srcset="" />
-            </div>
+            <div className="first">
+              <img className="arrow" src={images.menuArrow} alt="" srcset="" />
+            
             <div className="search">
               <img className="search-icon" src={images.search} alt="" srcset="" />
               <form action="/search" method="get">
               <input type="text" 
-              placeholder='search'
+              placeholder='Search Store'
               value={searchQuery}
               onChange={(e)=>{setsearchQuery(e.target.value)}}
               className='search-input'
@@ -39,6 +39,7 @@ const Header = () => {
                   News
                 </div>
             </nav>
+            </div>
             <nav className="sec-nav"
             >
               <div className="wishlist">

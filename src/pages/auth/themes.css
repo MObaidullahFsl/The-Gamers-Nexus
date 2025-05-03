@@ -9,6 +9,9 @@
     --dark-text-prim: white;
     --dark-text-sec: #969696;
     --dark-hover:#262626; */
+    --menu-primary:#FFFFFF;
+    --menu-secondary:#F4F5F9;
+    --menu-text-primary:black;
 }
 
 body.dark-mode{
@@ -17,4 +20,8 @@ body.dark-mode{
     --text-primary:  white;
     --text-secondary:#969696;
     --hover:         #262626; 
+    --menu-primary:#101014;
+    --menu-secondary:#202024;
+    --menu-text-primary:#B1B1B3;
+     
 }

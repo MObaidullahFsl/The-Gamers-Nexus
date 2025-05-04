@@ -38,15 +38,23 @@ function Recomended({ list }) {
   return (
     <>
       <div className="bigCard">
-      <div 
-  className="vid" 
-  style={{ 
-    backgroundImage: `url(${item.thumbnailUrl})`, // Removed extra braces
-    backgroundSize: 'cover', // Recommended to control sizing
-    backgroundPosition: 'center', // Optional: focus area
-  }}
-></div>
-      {/* <div className="vid" style={{ backgroundImage: `url(${{item.thumbnailUrl}})`}}>
+        <div
+          className="vid"
+          style={{
+            backgroundImage: `url(${item.thumbnailUrl})`, // Removed extra braces
+            backgroundSize: "cover", // Recommended to control sizing
+            backgroundPosition: "center", // Optional: focus area
+          }}
+        >
+          {/* <div className="bigTitle">
+            {item.title}
+          </div> */}
+          <div className="catch">
+            {catchers[index]}
+          </div>
+
+        </div>
+        {/* <div className="vid" style={{ backgroundImage: `url(${{item.thumbnailUrl}})`}}>
        <iframe
         width="100%"
         height="450"
@@ -60,8 +68,8 @@ function Recomended({ list }) {
       <img src={item.thumbnailUrl} alt="" srcset="" />
     </div> */}
         <div className="cards">
-          <div className="First" >
-          <div className="thumbnail">
+          <div className="First">
+            <div className="thumbnail">
               <img src={list[(index + 0) % 6].thumbnailUrl} alt="" srcset="" />
             </div>
             <div className="title">{list[(index + 0) % 6].title}</div>

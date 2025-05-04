@@ -255,14 +255,14 @@ const SignIn = () => {
       <div className="rightSide">
         <div className="arrows">
           <div className="left">
-            {" "}
+            
             <img
               src={isDarkMode ? images.arrowDark : images.arrow}
               alt="arrow left"
             />
           </div>
           <div className="right">
-            {" "}
+            
             <img
               src={isDarkMode ? images.arrowDark : images.arrow}
               alt="arrow left"

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Recomended from "../../components/Menu/Recomended";
+import HorizontalBar from "../../components/Menu/HorizontalBar";
 import './Home.css'
 
 const Home = () => {
@@ -106,6 +107,13 @@ useEffect(()=>{
     list = {recommendations}
     
     ></Recomended>
+
+ <HorizontalBar
+ title = "Trending Games"
+ list = {recommendations}
+ >
+ </HorizontalBar>
+
     </div>
     {/* <div>
       <h2>Welcome, {user ? user.username : "Guest"}</h2>

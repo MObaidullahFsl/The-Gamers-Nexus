@@ -526,6 +526,10 @@ app.get('/api/home/recommended', async(req,res)=>{
 })
 
 
+// trending 
+
+
+
 app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
 });

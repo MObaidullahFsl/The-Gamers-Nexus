@@ -84,3 +84,21 @@ text-align: left;
     min-width: 800px;
     max-width: 800px;
 }
+.bigTitle{
+    top:230px;
+    right: 300px;
+    font-size: 28px;
+    font-weight: 300;
+}
+.catch{
+    top:400px;
+    right: 300px;
+    font-weight: 600;
+}
+.catch,.bigTitle{
+    font-size: 28px;
+    color: white;
+    position: relative;
+    
+    
+}

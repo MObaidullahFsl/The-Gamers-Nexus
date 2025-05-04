@@ -80,3 +80,8 @@ Content-Type: application/json
 ###
 GET http://localhost:5000/api/users/1/common-games/4
 Content-Type: application/json
+
+
+###
+
+GET http://localhost:5000/api/home/recommended

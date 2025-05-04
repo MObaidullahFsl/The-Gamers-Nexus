@@ -1,0 +1,8 @@
+.mainHome {
+    background-color: var(--menu-primary);
+    width: calc(100vw - 165px);
+    height: calc(100vh - 100px);
+    margin-top: 100px;
+    margin-left: 165px;
+   
+  } 

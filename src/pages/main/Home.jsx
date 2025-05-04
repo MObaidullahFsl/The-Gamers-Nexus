@@ -1,10 +1,17 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import Recomended from "../../components/Menu/Recomended";
+import './Home.css'
 
 const Home = () => {
+
+  
   const [user, setUser] = useState(null);
   const [library, setLibrary] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [recommendations, setrecommendations] = useState([])
+  const [error, seterror] = useState(null)
+
   const navigate = useNavigate();
 
   const logout = async () => {
@@ -24,7 +31,27 @@ const Home = () => {
   };
   
 
-
+useEffect(()=>{
+  
+  const getRecommended = async()=>{
+    try {
+      const req = await fetch('http://localhost:5000/api/home/recommended',{credentials :"include"});
+      if(!req.ok){
+        throw new Error(`Http fetching error!: ${req.status}`);
+      }
+      const res = await req.json();
+      setrecommendations(res);
+       
+    } catch (error) {
+      console.error('Error fetching recommended games:', error);
+      seterror(error.message);
+    }
+    finally {
+      setLoading(false);
+    }
+  }
+  getRecommended();
+},[])
   useEffect(() => {
     const checkAuth = async () => {
       try {
@@ -73,7 +100,14 @@ const Home = () => {
   }
 
   return (
-    <div>
+    <>
+    <div className="mainHome">
+    <Recomended
+    list = {recommendations}
+    
+    ></Recomended>
+    </div>
+    {/* <div>
       <h2>Welcome, {user ? user.username : "Guest"}</h2>
       <h3>Your Game Library:</h3>
       {library.length > 0 ? (
@@ -89,7 +123,8 @@ const Home = () => {
 
       )}
       <button className="btn" onClick={logout}>Logout</button>
-    </div>
+    </div> */}
+    </>
   );
 };
 

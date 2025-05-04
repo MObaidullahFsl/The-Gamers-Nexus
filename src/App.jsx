@@ -12,7 +12,7 @@ import SignIn from "./pages/auth/SignIn";
 function App() {
   return (
     
-      <DarkModeProvider>
+      <DarkModeProvider style={{margin:0, padding:0}}>
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<HomeLayout />}>

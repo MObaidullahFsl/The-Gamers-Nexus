@@ -498,6 +498,34 @@ app.get('api/games/:gameId',async(req,res)=>{
 })
 
 
+
+// home apis 
+
+app.get('/api/home/recommended', async(req,res)=>{
+  try {
+    const pool = await connectToDatabase();
+    const result = await pool.request().query(`
+      SELECT TOP 6 *
+      FROM Games
+      ORDER BY NEWID();
+      `)
+
+      if (result.recordset.length===0){
+        return res.status(404).json({ message: 'No games found' });
+      }
+
+      res.status(200).json(result.recordset);
+
+  } catch (error) {
+    console.error('Database error:', error);
+    res.status(500).json({ 
+      error: 'Failed to fetch recommended games',
+      details: error.message
+    });
+  }
+})
+
+
 app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
 });

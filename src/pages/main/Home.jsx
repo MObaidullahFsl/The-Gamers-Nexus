@@ -114,6 +114,21 @@ useEffect(()=>{
  >
  </HorizontalBar>
 
+ <HorizontalBar
+ title = "Latest Editions"
+ list = {recommendations}
+ >
+ </HorizontalBar>
+
+
+ <HorizontalBar
+ title = "Sales"
+ list = {recommendations}
+ >
+ </HorizontalBar>
+
+
+
     </div>
     {/* <div>
       <h2>Welcome, {user ? user.username : "Guest"}</h2>

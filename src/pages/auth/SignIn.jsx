@@ -168,9 +168,11 @@ const SignIn = () => {
             isDarkMode
               ? {
                   backgroundColor: "#323232",
+                  maxWidth:"90%"
                 }
               : {
                   backgroundColor: "white",
+                  
                 }
           }
           type="text"
@@ -185,12 +187,12 @@ const SignIn = () => {
               isDarkMode
                 ? {
                     backgroundColor: "#323232",
-                    minWidth: "80%",
+                    maxWidth: "100%",
                     display: "inline",
                   }
                 : {
                     backgroundColor: "white",
-                    minWidth: "80%",
+                    maxWidth: "80%",
                     display: "inline",
                   }
             }

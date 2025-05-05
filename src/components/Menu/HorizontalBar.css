@@ -69,4 +69,7 @@
     border-radius: 12px;
     margin-bottom: 10px;
 }
+.Hcards > div > img:hover{
+    filter: brightness(1.2) contrast(1.1) saturate(1.1);
+}
 

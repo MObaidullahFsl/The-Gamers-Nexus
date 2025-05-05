@@ -126,8 +126,10 @@ useEffect(()=>{
  list = {recommendations}
  >
  </HorizontalBar>
-
-
+{/* 
+    <button onClick={logout()}>
+      Log out
+    </button> */}
 
     </div>
     {/* <div>

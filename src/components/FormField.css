@@ -1,17 +1,18 @@
-.body{
+.FFbody{
     display: flex;
     width:100%;
     flex-direction: column;
     justify-content: center;
     align-items:start;
-    
+
     margin-top: 8px;
 
 }
 .field::placeholder {
     color: #999;
     font-style: italic;
-    opacity: .8; 
+    opacity: .8;
+    text-align: left;
   }
 
 .fieldtitle{
@@ -23,9 +24,13 @@
 .field{
     border-radius: 10px;
     width: 100%;
-    height: 48px;
-     solid #D5D5D5 ;
+    height: 25px;
+     border:1px solid #D5D5D5 ;
     /* color:#969696; */
     color: var(--text-secondary);
-    padding:10px
+    padding:10px;
+    text-align: left;
+    color:var(--text-primary);
+    
+    
 }

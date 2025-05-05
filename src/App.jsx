@@ -18,7 +18,7 @@ function App() {
             <Route path="/" element={<HomeLayout />}>
               <Route index element={<Home />} />
               <Route path="profile" element={<Profile />} />
-              <Route path="game/:id" element={<GameCard />} />
+              <Route path="games/:id" element={<GameCard />} />
               <Route path="search" element={<Search />} />
             </Route>
 

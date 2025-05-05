@@ -7,7 +7,7 @@ const FormField = ({title,placeholder,handleInput,value,otherStyles,...props}) =
 
   const [entering, setEntering] = useState(false)
     return (
-        <div className="body">
+        <div className="FFbody">
         <div className="fieldtitle" style={{ color: 'var(--text-primary)' }}>{title} </div>
         <input className="field" onChange={(e)=>{handleInput(e.target.value)}}  onFocus={()=>{setEntering(true)}} onBlur={()=>{setEntering(false)}} placeholder={placeholder} 
         style={{ 

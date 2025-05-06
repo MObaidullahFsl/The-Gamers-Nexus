@@ -85,3 +85,8 @@ Content-Type: application/json
 ###
 
 GET http://localhost:5000/api/home/recommended
+
+
+###
+
+GET http://localhost:5000/api/auth

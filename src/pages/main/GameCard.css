@@ -1,5 +1,119 @@
 .mainGC{
-    padding:20px;
-    border:1px solid green;
+    background-color: var(--menu-primary);
+    margin-top: 100px;
+    color:var(--menu-text-primary);
+    margin-left: 160px;
+    min-height: 100vh;
+    min-width: 70vw;
+    display: flex;
+    flex-direction: row;
+    position: relative;
+    z-index: 1; 
+    
+
+}
+
+.leftGC{
+    display: flex;
+    flex-direction: column;
+    justify-content: left;
+    max-width: 750px;
+    padding-right: 30px;
+}
+.titleGC{
+    font-size: 30px;
+    color: var(--menu-text-secondary);
+    text-align: left;
+    font-weight: 800;
+margin: 10px;
+
+}
+.headerGC{
+    display: flex;
+    flex-direction: column;
+}
+.rightGC{
+    min-width: 320px;
+    margin-right: 300px;
+    
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.star img{
+    width: 20px;
+
+}
+
+.ShortDesc{
+    display: flex;
+    flex-direction: row;
+    margin-left: 5px;
+    
+
+}
+.trailerGC{
+    display: flex;
+    flex-direction: column;
+}
+.tabGC{
+    margin-bottom:30px;
+    margin-top: 30px;
+    font-size: 20px;
+    border-bottom: 2px solid brown;
+    text-align: left;
+    color: var(--menu-text-secondary);
+    margin-left: 10px;
+    margin-right: 690px;
+}
+.ShortDesc > div{
+    margin-left: 3px;
+    margin-right: 3px;
+}
+.star{
+    margin-left: 10px;
+    margin-right: 5px;
+}
+.ratingGC{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    font-size: 15px;
+}
+.emoji{
+    margin-right: 5px;
+}
+.thumbnailGC{
+    margin-top: 170px;
+    width: 280px;
+    height: auto;
+    
+}
+.thumbnailGC img{
+    max-width: 280px;
+}
+.baseGame{
+    background-color: var(--menu-secondary);
+    color: var(--menu-text-secondary);
+    border: 1px solid grey;
+    align-self:flex-start;
+    margin: 10px 15px;
+    padding: 8px 12px;
+    border-radius: 5px;
+}
+.price{
+    color: var(--menu-text-secondary);
+    font-weight: 700;
+    font-size: 15px;
+    margin: 10px 15px;
+    align-self: flex-start;
+}
+.buttonsGC > div{
+    padding: 20px 120px;
+    margin: 10px 0px;
+    font-size: 15px;
+    background-color: var(--menu-secondary);
+    border-radius: 8px;
 
 }

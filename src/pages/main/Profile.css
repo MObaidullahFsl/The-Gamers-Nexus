@@ -1,0 +1,40 @@
+.avatarP{
+    align-self:center;
+    
+    padding: 55px 90px;
+    border-radius: 100%;
+    background-color: #339A24;
+    color: var(--menu-text-secondary);
+    font-size: 90px;
+}
+.headerP{
+    margin: 10px;
+}
+.mainP{
+    display: flex;
+    flex-direction: column;
+    background-color: var(--menu-primary);
+    margin-top: 100px;
+    margin-left: 166px; 
+    min-height: 100vh;
+    min-width: 85vw;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    z-index: 1; 
+    color: var(--menu-text-secondary);
+    
+}
+.headerP{
+    display: flex;
+    align-items: center;
+}
+.descP{
+display: flex;
+flex-direction: column;
+margin-left: 30px
+}
+.titleP{
+    font-size: 70px;
+    font-weight: 700;
+}

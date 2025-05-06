@@ -155,9 +155,11 @@ input::placeholder,.search-input{
     margin-left:40px;
 }
 .avatar{
-    align-self:auto;
-    margin-right:185px
-}
-.avatar img{
-    width:35px; height:auto;
+    align-self:center;
+    margin-right:205px;
+    padding: 10px 15px;
+    border-radius: 100%;
+    background-color: var(--menu-secondary);
+    color: var(--menu-text-secondary);
+    font-size: 15px;
 }

@@ -479,7 +479,15 @@ app.get('/api/games/publisher/:publisherId', async (req, res) => {
   }
 });
 
-app.get('api/games/:gameId',async(req,res)=>{
+app.get('/api/me',async(req,res)=>{
+  if (req.session.user) {
+    res.json(req.session.user); // Send user data stored in Redis
+  } else {
+    res.status(401).json({ error: "Unauthorized" });
+  }
+})
+
+app.get('/api/games/:gameId',async(req,res)=>{
   try {
     const pool = await connectToDatabase();
     const gameId = req.params.gameId

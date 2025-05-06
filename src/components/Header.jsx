@@ -82,7 +82,7 @@ const Header = () => {
   <header className="main-header">
         <div className="header-content">
             <div className="first">
-              <img className="arrow" src={images.menuArrow} alt="" srcset="" />
+              <img className="arrow" onClick={() => navigate(-1)} src={images.menuArrow} alt="" srcset="" />
             
             <div className="search">
               <img className="search-icon" src={images.search} alt="" srcset="" />
@@ -110,7 +110,7 @@ const Header = () => {
             </div>
             <nav className="sec-nav"
             >
-              <div className="wishlist">
+              <div className="wishlist" onClick={()=>}>
                 Wishlist
               </div>
               <div className="cart">
@@ -118,7 +118,7 @@ const Header = () => {
               </div>
 
             </nav>
-            <div  onClick={()=>navigate('/Profile')} className="avatar">
+            <div  onClick={()=>navigate(`/Profile/${user.id}`,{state:user })} className="avatar">
               {user.username[0]}
             </div>
         </div>

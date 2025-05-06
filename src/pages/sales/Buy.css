@@ -1,0 +1,10 @@
+.mainB{
+    background-color: var(--menu-primary);
+    margin-top: 100px;
+    margin-left: 160px; 
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    z-index: 1; 
+}

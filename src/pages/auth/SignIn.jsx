@@ -41,7 +41,7 @@ const SignIn = () => {
         setuser(result.user)
         navigate('/')
       }else{
-        alert("not logged in!")
+        console.log("not logged in!")
       } }catch (error) {
         console.error('Error checking authentication:', error);
         

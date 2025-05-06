@@ -1,9 +1,34 @@
 import React, { useEffect, useState } from 'react'
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import './GameCard.css'
 import images from "../../assets/images/constants";
 const GameCard = () => {
   const [game, setgame] = useState(null)
+  const [loading, setLoading] = useState(true);
+  const navigate = useNavigate();
+   useEffect(() => {
+      const checkAuth = async () => {
+        try {
+          const req = await fetch("http://localhost:5000/api/auth", {
+            credentials: "include",
+          });
+          const res = await req.json();
+  
+          if (res.user) {
+            console.log("")
+          } else {
+            navigate("/signin");
+          }
+        } catch (error) {
+          console.error("Auth check fail!", error);
+          navigate("/signin");
+        } finally {
+          setLoading(false);
+        }
+      };
+  
+      checkAuth();
+    }, [navigate]);
 
   const extraDes = [
     '\uD83C\uDFAE    Exciting Gameplay',        // 🎮
@@ -47,7 +72,9 @@ const GameCard = () => {
       setRandomWords([]); // Handle case where count is 0
     }
   }, []); 
-
+  if (loading) {
+    return <h1>Loading...</h1>;
+  }
   return (
   
    <div className="mainGC">

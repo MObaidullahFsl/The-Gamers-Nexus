@@ -9,6 +9,10 @@ function HorizontalBar({ title, list }) {
     const { isDarkMode, toggleDarkMode } = useDarkMode();
     
     const navigate = useNavigate();
+    if (!list || list.length < 5) {
+      return <div>Loading...</div>;
+    }
+    
   return (
     <div className="horMain">
       <div className="topLine">

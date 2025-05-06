@@ -11,95 +11,123 @@ const SignIn = () => {
     username: "",
     password: "",
   });
-  
-  const {isDarkMode,toggleDarkMode} = useDarkMode();
-
-
+  const { isDarkMode, toggleDarkMode } = useDarkMode();
   const [mode, setmode] = useState(0);
-  // const thumbnails = images.th;
   const navigate = useNavigate();
-  const [user, setuser] = useState(null)
+  const [user, setuser] = useState(null);
+  const [isSubmitting, setisSubmitting] = useState(false);
+  const [error, setError] = useState(null);
 
-  useEffect(()=>{
-
-    const alreadylogged=async()=>{
-      try{
+  // Check if user is already logged in
+  useEffect(() => {
+    const alreadylogged = async () => {
+      try {
         const req = await fetch("http://localhost:5000/api/auth", {
           credentials: "include",
-          headers: {
-            'Content-Type': 'application/json',
-          }
+          headers: { 'Content-Type': 'application/json' }
         });
       
-      const retype = req.headers.get("content-type");
-      if(!retype || !retype.includes("application/json")){
-        throw new Error("ret type err!, ret type is: \n",retype)
-      }
-      const result = await req.json(); 
-      if(result.user){
-        console.log(`Already logged in`)
-        setuser(result.user)
-        navigate('/')
-      }else{
-        console.log("not logged in!")
-      } }catch (error) {
-        console.error('Error checking authentication:', error);
+        const retype = req.headers.get("content-type");
+        if (!retype || !retype.includes("application/json")) {
+          throw new Error("ret type err!, ret type is: \n", retype);
+        }
         
-        //navigate('/signin');
+        const result = await req.json(); 
+        if (result.user) {
+          console.log(`Already logged in`);
+          setuser(result.user);
+          navigate('/');
+        }
+      } catch (error) {
+        console.error('Error checking authentication:', error);
       }
-    }
-   alreadylogged()
-  },[navigate])
+    };
+    alreadylogged();
+  }, [navigate]);
 
-  
-  const [isSubmitting, setisSubmitting] = useState(false);
-
-  const submit = async() =>{
-    console.log(form);
-    if (form.username=="" || form.password=="") {
-      alert("Error Fill in all the fields!");
+  // Signup function
+  const signUp = async () => {
+    if (form.username === "" || form.password === "") {
+      setError("Username and password are required");
       return;
     }
+
     setisSubmitting(true);
+    setError(null);
+
     try {
-      const result = await fetch('http://localhost:5000/api/signin',{
-        method:'POST',
-        headers:{
-          'Content-Type':'application/json',
-        },   
+      const result = await fetch('http://localhost:5000/api/signup', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
         credentials: 'include',
         body: JSON.stringify({
-      username: `${form.username}`,
-          password: `${form.password}`
+          username: form.username,
+          password: form.password
         })
-     
-      })
+      });
 
-        if(!result.ok){
-          console.log("a:",result);
-          // const errString = await result.json();
-          
-          //throw new Error(errString.message || "ERror");
-          throw new Error(`HTTP error! status: ${result.status}`);
-          
-        }
+      if (!result.ok) {
+        const errorData = await result.json();
+        throw new Error(errorData.message || "Registration failed");
+      }
 
-        const data  = await result.json();
-        setuser(data.user);
-        
-        alert("Logged in Successfully!");
-        navigate("/");
-
-
-
-
-    } catch (error) {
-      console.error("failed!",error,error.message)
-    }finally{
+      const data = await result.json();
+      setuser(data.user);
+      alert("Account created successfully!");
+      navigate("/");
+    } catch (err) {
+      setError(err.message);
+      console.error("Signup failed:", err);
+    } finally {
       setisSubmitting(false);
     }
-  }
-  
+  };
+
+  // Login function
+  const login = async () => {
+    if (form.username === "" || form.password === "") {
+      setError("Username and password are required");
+      return;
+    }
+
+    setisSubmitting(true);
+    setError(null);
+
+    try {
+      const result = await fetch('http://localhost:5000/api/signin', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        credentials: 'include',
+        body: JSON.stringify({
+          username: form.username,
+          password: form.password
+        })
+      });
+
+      if (!result.ok) {
+        throw new Error(`HTTP error! status: ${result.status}`);
+      }
+
+      const data = await result.json();
+      setuser(data.user);
+      alert("Logged in successfully!");
+      navigate("/");
+    } catch (err) {
+      setError(err.message);
+      console.error("Login failed:", err);
+    } finally {
+      setisSubmitting(false);
+    }
+  };
+
+  // Submit handler (routes to login/signup based on mode)
+  const submit = async () => {
+    if (mode === 1) {
+      await signUp(); // Signup mode
+    } else {
+      await login(); // Login mode
+    }
+  };  
   return (
     <div className="main">
       <div className="leftSide">

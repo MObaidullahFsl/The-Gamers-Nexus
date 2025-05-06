@@ -13,4 +13,5 @@
     font-weight: 600;
     color: var(--menu-text-secondary);
     text-align: left;
+    margin-left: 20px;
 }

@@ -15,6 +15,7 @@ import googleDark from "./icons/googleDark.png"
 import discordDark from "./icons/discordDark.png"
 import whatsappDark from "./icons/whatsappDark.png"
 import instagramDark from "./icons/instagramDark.png"
+import buy from "./icons/buy.png"
 
 import arrow from "./icons/arrow.png"
 import arrowDark from "./icons/arrowDark.png"
@@ -36,4 +37,4 @@ import th4 from "./thumbnails/acshadows.jpg"
 const th = [th1,th2,th3,th4];
 
 
-export default {  star,menuArrow,library,store,avatar,search,logoDay,logoDark,login,create,loginLight,createLight,google,discord,whatsapp,instagram,googleDark,discordDark,instagramDark,whatsappDark,arrow,arrowDark,enter, th };
+export default {  buy,star,menuArrow,library,store,avatar,search,logoDay,logoDark,login,create,loginLight,createLight,google,discord,whatsapp,instagram,googleDark,discordDark,instagramDark,whatsappDark,arrow,arrowDark,enter, th };

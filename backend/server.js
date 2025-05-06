@@ -630,7 +630,84 @@ app.get("/api/home/recommended", async (req, res) => {
   }
 });
 
-// trending
+app.post("/api/user/:id/purchase", async (req, res) => {
+  const userId = req.params.id;
+  const { gameId } = req.body;
+
+  try {
+    const pool = await connectToDatabase();
+    await pool.request()
+      .input("userId", userId)
+      .input("gameId", gameId)
+      .query(`
+        INSERT INTO purchased (user_id, purchase_date, game_id)
+        VALUES (@userId, GETDATE(), @gameId);
+      `);
+
+    res.status(201).json({ message: "Game purchased successfully" });
+  } catch (error) {
+    console.error("Purchase error:", error);
+    res.status(500).json({ error: "Failed to record purchase" });
+  }
+});
+
+
+app.get("/api/user/:id/details", async (req, res) => {
+  const userId = req.params.id;
+
+  try {
+    const pool = await connectToDatabase();
+    const result = await pool.request()
+      .input("userId", userId)
+      .query(`
+        SELECT 
+          g.id AS game_id,
+          g.thumbnailUrl,
+          g.trailerUrl,
+          g.publisher,
+          g.title,
+          gd.description,
+          gp.int_price
+        FROM wishlist w
+        JOIN games g ON w.game_id = g.id
+        LEFT JOIN game_description gd ON g.id = gd.game_id
+        LEFT JOIN game_price gp ON g.id = gp.game_id
+        WHERE w.user_id = @userId
+      `);
+
+    if (result.recordset.length === 0) {
+      return res.status(404).json({ message: "No wishlist items found" });
+    }
+
+    res.status(200).json(result.recordset);
+  } catch (error) {
+    console.error("Wishlist fetch error:", error);
+    res.status(500).json({ error: "Failed to fetch wishlist" });
+  }
+});
+
+app.delete("/api/friends/:id", async (req, res) => {
+  const friendId = req.params.id;
+
+  try {
+    const pool = await connectToDatabase();
+    const result = await pool.request()
+      .input("friendId", friendId)
+      .query(`
+        DELETE FROM Friends WHERE id = @friendId
+      `);
+
+    if (result.rowsAffected[0] === 0) {
+      return res.status(404).json({ message: "Friend not found" });
+    }
+
+    res.status(200).json({ message: "Friend removed successfully" });
+  } catch (error) {
+    console.error("Friend remove error:", error);
+    res.status(500).json({ error: "Failed to remove friend" });
+  }
+});
+
 
 app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);

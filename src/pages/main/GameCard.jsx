@@ -5,6 +5,18 @@ import images from "../../assets/images/constants";
 const GameCard = () => {
   const [game, setgame] = useState(null)
   const [loading, setLoading] = useState(true);
+  
+  
+  const [purchasing, setPurchasing] = useState(false);
+  const [purchaseError, setPurchaseError] = useState(null);
+  
+  const pricer = () => {
+    const min = 9.99;
+    const max = 59.99;
+    return `$${(Math.random() * (max - min) + min).toFixed(2)}`;
+  };
+  
+  
   const navigate = useNavigate();
    useEffect(() => {
       const checkAuth = async () => {
@@ -72,7 +84,27 @@ const GameCard = () => {
       setRandomWords([]); // Handle case where count is 0
     }
   }, []); 
-  if (loading) {
+  const handleBuy = async () => {
+    try {
+      const res = await fetch(`http://localhost:5000/api/user/${userId}/purchase`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        credentials: 'include', // for session cookies
+        body: JSON.stringify({ gameId: game.id })
+      });
+  
+      if (!res.ok) throw new Error('Purchase failed');
+  
+      const data = await res.json();
+      alert(data.message); // or toast
+    } catch (err) {
+      console.error("Buy error:", err);
+      alert("Something went wrong while buying: Lack of Funds.");
+    }
+  };
+    if (loading) {
     return <h1>Loading...</h1>;
   }
   return (
@@ -137,10 +169,10 @@ const GameCard = () => {
       </div>
       <div className="baseGame">Base Game</div>
       <div className="price">
-      $34.99
+      {pricer()}
       </div>
       <div className="buttonsGC">
-        <div className="buynow">Buy Now</div>
+      <div onClick={handleBuy}>Buy Now</div>
         <div className="addtocart">Add to Cart</div>
         <div className="wishlist">Wish List</div>
       </div>

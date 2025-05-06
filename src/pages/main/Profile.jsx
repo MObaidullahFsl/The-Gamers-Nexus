@@ -180,6 +180,23 @@ useEffect(() => {
   fetchStats();
 }, [user]);
 
+
+const removeFriend = async (id) => {
+  try {
+    const res = await fetch(`http://localhost:5000/api/friends/${id}`, {
+      method: "DELETE",
+    });
+    const data = await res.json();
+    if (res.ok) {
+      setfriends((prev) => prev.filter((f) => f.id !== id));
+    } else {
+      console.error(data.error || "Failed to remove friend");
+    }
+  } catch (err) {
+    console.error("Remove error:", err);
+  }
+};
+
   // Render states
   if (loading) {
     return (
@@ -261,26 +278,29 @@ useEffect(() => {
 
         
 
-<div className="contentP">
+        <div className="contentP">
   {friends.map((friend, index) => {
     const color = colors[index % colors.length]; 
     return (
-      <div className="friendP" key={index} >
+      <div className="friendP" key={index}>
         <div
           className="cardavatarP"
-          onClick={()=>navigate(`/Profile/${friend.id}`,{state:friend })}
+          onClick={() => navigate(`/Profile/${friend.id}`, { state: friend })}
           style={{ backgroundColor: color }}
-        >
+        > 
           {friend.username[0]}
         </div>
 
         <div className="cardDescP">
           <div className="cardtitleP">{friend.username}</div>  
           <div className="publishedP">
-               Total Friends: {friendStats[friend.id]?.totalFriends ?? '...'}
+            Total Friends: {friendStats[friend.id]?.totalFriends ?? '...'}
           </div>
           <div className="pubDateP">
-          Total Games: {friendStats[friend.id]?.totalGames ?? '...'}
+            Total Games: {friendStats[friend.id]?.totalGames ?? '...'}
+          </div>
+          <div className="removeFriend" onClick={() => removeFriend(friend.id)}>
+            Remove Friend
           </div>
         </div>
       </div>

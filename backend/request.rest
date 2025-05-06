@@ -20,7 +20,7 @@ POST http://localhost:5000/api/signup
 Content-Type: application/json
 
 {
-    "username":"test10",
+    "username":"test13",
     "password":"12345678"
 
 }
@@ -62,8 +62,8 @@ POST http://localhost:5000/api/friends/add
 Content-Type: application/json
 
 {
-  "userId": "6",
-  "friendId":"1"
+  "userId": "10",
+  "friendId":"11"
 }
 
 ###
@@ -90,3 +90,7 @@ GET http://localhost:5000/api/home/recommended
 ###
 
 GET http://localhost:5000/api/auth
+
+###
+ POSt 
+

@@ -2,68 +2,67 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Recomended from "../../components/Menu/Recomended";
 import HorizontalBar from "../../components/Menu/HorizontalBar";
-import './Home.css'
+import './Home.css';
 
 const Home = () => {
-
-  
   const [user, setUser] = useState(null);
   const [library, setLibrary] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [recommendations, setrecommendations] = useState([])
-  const [error, seterror] = useState(null)
+  const [recommendations, setRecommendations] = useState([]);
+  const [error, setError] = useState(null);
+
+  const [trendingGames, setTrendingGames] = useState([]);
+  const [latestEditions, setLatestEditions] = useState([]);
+  const [salesGames, setSalesGames] = useState([]);
 
   const navigate = useNavigate();
 
-  const logout = async () => {
-    try {
-      const response = await fetch("http://localhost:5000/api/logout", {
-        method: "POST",
-        credentials: "include", 
-      });
-  
-      const result = await response.json();
-      if (result.message) {
-        window.location.reload(); 
-      }
-    } catch (error) {
-      console.error("Logout failed:", error);
-    }
-  };
-  
+  const [doneCount, setDoneCount] = useState(0);
+  const markDone = () => setDoneCount(prev => {
+    const next = prev + 1;
+    if (next >= 2) setLoading(false);
+    return next;
+  });
 
-useEffect(()=>{
-  
-  const getRecommended = async()=>{
-    try {
-      const req = await fetch('http://localhost:5000/api/home/recommended',{credentials :"include"});
-      if(!req.ok){
-        throw new Error(`Http fetching error!: ${req.status}`);
+  const shuffleArray = (arr) => {
+    const copy = [...arr];
+    for (let i = copy.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [copy[i], copy[j]] = [copy[j], copy[i]];
+    }
+    return copy;
+  };
+
+  useEffect(() => {
+    const getRecommended = async () => {
+      try {
+        const req = await fetch('http://localhost:5000/api/home/recommended', { credentials: "include" });
+        if (!req.ok) throw new Error(`Http fetching error!: ${req.status}`);
+        const res = await req.json();
+        setRecommendations(res);
+
+        const shuffled = shuffleArray(res);
+        setTrendingGames(shuffled.slice(0, 5));
+        setLatestEditions(shuffleArray(res).slice(0, 5));
+        setSalesGames(shuffleArray(res).slice(0, 5));
+      } catch (error) {
+        console.error('Error fetching recommended games:', error);
+        setError(error.message);
+      } finally {
+        markDone();
       }
-      const res = await req.json();
-      setrecommendations(res);
-       
-    } catch (error) {
-      console.error('Error fetching recommended games:', error);
-      seterror(error.message);
-    }
-    finally {
-      setLoading(false);
-    }
-  }
-  getRecommended();
-},[])
+    };
+    getRecommended();
+  }, []);
+
   useEffect(() => {
     const checkAuth = async () => {
       try {
-        const req = await fetch("http://localhost:5000/api/auth", {
-          credentials: "include",
-        });
+        const req = await fetch("http://localhost:5000/api/auth", { credentials: "include" });
         const res = await req.json();
-
         if (res.user) {
           setUser(res.user);
-          fetchLibrary(res.user.id); 
+          fetchLibrary(res.user.id);
         } else {
           navigate("/signin");
         }
@@ -71,85 +70,34 @@ useEffect(()=>{
         console.error("Auth check fail!", error);
         navigate("/signin");
       } finally {
-        setLoading(false);
+        markDone();
       }
     };
-
     checkAuth();
   }, [navigate]);
+
   const fetchLibrary = async () => {
     try {
       const req = await fetch("http://localhost:5000/api/library", {
         method: "GET",
         credentials: "include",
       });
-  
       const res = await req.json();
-  
-      if (res.error) {
-        console.error("Library fetch failed:", res.error);
-      } else {
-        setLibrary(res); 
-      }
+      if (!res.error) setLibrary(res);
     } catch (error) {
       console.error("Error fetching library:", error);
     }
   };
-  
-  if (loading) {
-    return <h1>Loading...</h1>;
-  }
+
+  if (loading) return <h1>Loading...</h1>;
 
   return (
-    <>
     <div className="mainHome">
-    <Recomended
-    list = {recommendations}
-    
-    ></Recomended>
-
- <HorizontalBar
- title = "Trending Games"
- list = {recommendations}
- >
- </HorizontalBar>
-
- <HorizontalBar
- title = "Latest Editions"
- list = {recommendations}
- >
- </HorizontalBar>
-
-
- <HorizontalBar
- title = "Sales"
- list = {recommendations}
- >
- </HorizontalBar>
-{/* 
-    <button onClick={logout()}>
-      Log out
-    </button> */}
-
+      <Recomended list={recommendations} />
+      <HorizontalBar title="Trending Games" list={trendingGames} />
+      <HorizontalBar title="Latest Editions" list={latestEditions} />
+      <HorizontalBar title="Sales" list={salesGames} />
     </div>
-    {/* <div>
-      <h2>Welcome, {user ? user.username : "Guest"}</h2>
-      <h3>Your Game Library:</h3>
-      {library.length > 0 ? (
-        <ul>
-          {library.map((game) => (
-            <li key={game.id}>
-              <strong>{game.title}</strong> - Published on {game.publish_date}
-            </li>
-          ))}
-        </ul>
-      ) : (
-        <p>No games found in your library. </p>
-
-      )}
-      <button className="btn" onClick={logout}>Logout</button>
-    </div> */}
-    </>
   );
 };
 

@@ -1,0 +1,84 @@
+.VerMain{
+    margin-top: 100px;
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    
+    color:var(--menu-text-secondary);
+    background-color: var(--menu-primary);
+
+    
+    margin-top: 100px;
+    
+    min-height: 100vh;
+    min-width: 85vw;
+    position: relative;
+    z-index: 1; 
+    
+
+}
+.topLine{
+    display: flex;
+    flex-direction: row;
+    height: 50px;
+    margin-bottom: 20px;
+    align-items: center;
+}
+.topLineTitle{
+    font-size: 25px;
+    font-weight: 600;
+        margin-left: 5px;
+}
+.topLine img{
+    width: 27px; height: 27px;
+    object-fit: contain;
+}
+.l img, .r img{
+    object-fit: contain;
+    width:15px; height:15px;
+    
+}
+.l img{
+    transform:rotate(180deg);
+}
+
+.l, .r{
+    
+    margin:2px;
+    border-radius: 100%;
+    background-color: var(--bg-secondary);
+    width:30px; height:30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding:12px;
+    
+}
+.Vcards{
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    font-size: 15px;
+    color: var(--menu-text-primary);
+    gap:20px
+}
+.Vcards > div{
+    display: flex;
+    flex-direction: column;
+    margin-right: 20px;
+}
+.T{
+    color: var(--menu-text-secondary);
+    font-weight: 800;
+}
+.Vcards > div > img{
+    object-fit: cover;
+    width: 378px;
+    height: 238px;
+    border-radius: 12px;
+    margin-bottom: 10px;
+}
+.Vcards > div > img:hover{
+    filter: brightness(1.2) contrast(1.1) saturate(1.1);
+}
+

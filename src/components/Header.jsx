@@ -9,7 +9,7 @@ import { useNavigate } from "react-router-dom";
 const Header = () => {
 
   const {isDarkMode,toggleDarkMode} = useDarkMode()
-  const [searchQuery, setsearchQuery] = useState('')
+  const [searchQuery, setSearchQuery] = useState('')
   const navigate = useNavigate();
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -56,7 +56,24 @@ const Header = () => {
     };
   }, []);
 
+
+    
+    
+  
+    const handleSearch = async (e) => {
+      e.preventDefault(); // Prevent default form submission 
+      if (!searchQuery.trim()) return;
+      
+      try {
+        // Navigate to search page with query as URL parameter
+        navigate(`/search?q=${encodeURIComponent(searchQuery)}`);
+      } catch (error) {
+        console.error('Search error:', error);
+      }
+    }
+
   // Render states
+
   if (loading) {
     return (
       <div className="loading-state">
@@ -84,18 +101,18 @@ const Header = () => {
             <div className="first">
               <img className="arrow" onClick={() => navigate(-1)} src={images.menuArrow} alt="" srcset="" />
             
-            <div className="search">
-              <img className="search-icon" src={images.search} alt="" srcset="" />
-              <form action="/search" method="get">
-              <input type="text" 
-              placeholder='Search Store'
-              value={searchQuery}
-              onChange={(e)=>{setsearchQuery(e.target.value)}}
-              className='search-input'
-              />
-              
-              </form>
-            </div>
+              <div className="search">
+      <img className="search-icon" src={images.search} alt="Search" />
+      <form onSubmit={handleSearch}>
+        <input
+          type="text"
+          placeholder="Search Store"
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
+          className="search-input"
+        />
+      </form>
+    </div>
             <nav className="main-nav">
                 <div className="discover">
                   Discover
@@ -110,10 +127,10 @@ const Header = () => {
             </div>
             <nav className="sec-nav"
             >
-              <div className="wishlist" onClick={()=>}>
+              <div className="wishlist" onClick={()=>navigate(`/Wishlist`)}>
                 Wishlist
               </div>
-              <div className="cart">
+              <div className="cart" onClick={()=>navigate(`/BuyNow`)}> 
                 Cart
               </div>
 

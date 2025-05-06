@@ -8,6 +8,8 @@ import Profile from "./pages/main/Profile";
 import Search from "./pages/main/Search";
 import GameCard from "./pages/main/GameCard";
 import SignIn from "./pages/auth/SignIn";
+import Wishlist from "./pages/sales/Wishlist";
+import BuyNow from "./pages/sales/BuyNow";
 
 function App() {
   return (
@@ -20,8 +22,11 @@ function App() {
               <Route path="profile/:id" element={<Profile />} />
               <Route path="games/:id" element={<GameCard />} />
               <Route path="search" element={<Search />} />
+              <Route path="wishlist" element={<Wishlist />} />
+              <Route path="buynow" element={<BuyNow />} />
+              <Route path="search" element={<Search />} />
             </Route>
-
+            
             <Route path="/signin" element={<SignIn />} />
           </Routes>
         </BrowserRouter>

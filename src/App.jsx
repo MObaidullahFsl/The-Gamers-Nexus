@@ -14,8 +14,8 @@ import BuyNow from "./pages/sales/BuyNow";
 function App() {
   return (
     
-      <DarkModeProvider style={{margin:0, padding:0}}>
-        <BrowserRouter>
+      <DarkModeProvider style={{margin:0, padding:0}} basename="/The-Gamers-Nexus">
+        <BrowserRouter basename="/The-Gamers-Nexus">
           <Routes>
             <Route path="/" element={<HomeLayout />}>
               <Route index element={<Home />} />

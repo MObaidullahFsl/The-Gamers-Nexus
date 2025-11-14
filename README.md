@@ -1,11 +1,64 @@
-# The Gamers Nexus
+# The Gamers Nexus 🎮
 
-This is where the details of the project will go to 
-- Oba
-- Remo
-- Chuan
+**The Gamers Nexus** is a **digital video game store** inspired by Epic Games, built with **React (Vite)** for the frontend and **MSSQL** for the backend. It offers a modern UI with **dark and light modes**, designed for gamers who want a smooth and interactive experience.  
 
-## Expanding the ESLint configuration
+> ⚠️ Currently, the backend is closed, so on GitHub Pages you can only explore the **authentication page**.
 
-If you are developing a production application, we recommend using TypeScript and enable type-aware lint rules. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
-The Gamers Nexus -- Video Game Store
+---
+
+## Features
+
+- **User Authentication:** Session-based auth using **Redis**  
+- **Game Browsing & Search:** Find games quickly with the search functionality  
+- **Social Features:** Comment on games, add friends, and see recommended games  
+- **Purchasing System:** Buy games directly through the platform  
+- **Dark & Light Mode:** Switch between themes for a personalized experience  
+
+---
+
+## Tech Stack
+
+- **Frontend:** React + Vite  
+- **Backend:** MSSQL  
+- **Authentication:** Redis session-based  
+- **Future Plans:** Moving backend to **Supabase** and deployment on **Vercel**  
+
+---
+
+## Future Improvements
+
+- Full **backend integration** for GitHub Pages viewing  
+- **Responsive design** for mobile and tablet devices  
+- Improved **animations**, **commenting system**, and **page interactions**  
+- Complete **store functionality** with live purchasing  
+
+---
+
+## Screenshots
+
+## Screenshots
+
+![Dark Auth Page](screenshots/1.png)
+![Light Auth Page](screenshots/2.png)
+![Home Page](screenshots/3.png)
+
+
+---
+
+## Usage
+
+Since the backend is closed, you can currently explore only the **authentication page** on GitHub Pages.  
+
+**Planned:** Once deployed with Supabase, the full app will be accessible online with all features working.
+
+---
+
+## License
+
+This project is open for learning and demonstration purposes.  
+
+---
+
+## Contact
+
+Developed by [MObaidullahFsl] along with [DemolisherCpp]. 

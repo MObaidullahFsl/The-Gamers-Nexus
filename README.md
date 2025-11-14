@@ -50,13 +50,7 @@
 Since the backend is closed, you can currently explore only the **authentication page** on GitHub Pages.  
 
 **Planned:** Once deployed with Supabase, the full app will be accessible online with all features working.
-
----
-
-## License
-
-This project is open for learning and demonstration purposes.  
-
+ 
 ---
 
 ## Contact
